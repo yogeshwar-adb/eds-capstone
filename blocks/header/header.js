@@ -157,4 +157,21 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  const onScroll = () => navWrapper.classList.toggle('scrolled', window.scrollY > 80);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const links = navWrapper.querySelectorAll('.nav-sections a');
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (nav.getAttribute('aria-expanded') === 'true' && !isDesktop.matches) {
+        toggleMenu(nav, navSections, false);
+      }
+    });
+    const href = link.getAttribute('href');
+    if (href && window.location.pathname === new URL(href, window.location.href).pathname) {
+      link.classList.add('active-link');
+    }
+  });
 }

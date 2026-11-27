@@ -1,0 +1,208 @@
+body:has(.product-list) {
+  background-color: #121110;
+}
+
+body:has(.product-list) main {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 0%, rgb(212 175 55 / 18%), transparent 45%),
+    radial-gradient(circle at 85% 100%, rgb(212 175 55 / 12%), transparent 40%),
+    linear-gradient(180deg, #1c1a16 0%, #121110 100%);
+  color: #f5efe0;
+}
+
+.product-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px 56px;
+}
+ 
+.product-list-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+  justify-content: center;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-list-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.4s ease;
+}
+
+.product-list-item:hover {
+  transform: translateY(-6px);
+}
+
+.product-list-image {
+  display: block;
+  box-sizing: border-box;
+  width: 80%;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  border: 1px solid rgb(212 175 55 / 45%);
+  border-radius: 200px 200px 14px 14px;
+  background: #efe9dc;
+  object-fit: cover;
+  object-position: center;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.product-list-item:first-child .product-list-image {
+  object-fit: contain;
+  background: #2b221a;
+}
+
+.product-list-item:hover .product-list-image {
+  border-color: #f4d97a;
+  box-shadow: 0 0 60px rgb(212 175 55 / 35%);
+}
+
+.product-list-content {
+  flex: 1;
+  padding: 22px 12px 0;
+}
+
+.product-list-content h3 {
+  margin: 0 0 6px;
+  font-family: 'Marcellus', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #f5efe0;
+}
+
+.product-list-content h3::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin: 12px auto 0;
+  background: #d4af37;
+}
+
+.product-list-description {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #b9b09a;
+}
+
+.product-list-category {
+  margin: 10px 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #d4af37;
+}
+
+.product-list-price {
+  margin: 10px 0 0;
+  font-family: 'Marcellus', serif;
+  color: #f4d97a;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+}
+
+.product-list-checkout {
+  position: relative;
+  margin: 18px 0 0;
+  padding: 8px 18px;
+  border: 1px solid #d4af37;
+  border-radius: 230px;
+  background: none;
+  color: #f4d97a;
+  font-family: 'Marcellus', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.product-list-checkout:hover {
+  border-color: #f4d97a;
+  color: #fff;
+}
+
+ 
+.product-list-checkout:focus-visible {
+  outline: 3px solid #2680eb;
+  outline-offset: 3px;
+}
+ 
+.product-list-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+ 
+.product-list-pagination button {
+  min-width: 110px;
+  padding: 10px 18px;
+  border: 1px solid #d4af37;
+  border-radius: 230px;
+  background-color: transparent;
+  color: #f4d97a;
+  font-family: 'Marcellus', serif;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+ 
+.product-list-pagination button:hover:not(:disabled) {
+  background-color: #d4af37;
+  color: #181818;
+}
+ 
+.product-list-pagination button:focus-visible {
+  outline: 3px solid #f4d97a;
+  outline-offset: 3px;
+}
+ 
+.product-list-pagination button:disabled {
+  border-color: #5a5242;
+  color: #7a7060;
+  cursor: not-allowed;
+}
+ 
+.product-list-page-info {
+  min-width: 100px;
+  text-align: center;
+  font-family: 'Marcellus', serif;
+  letter-spacing: 0.06em;
+  color: #f5efe0;
+}
+ 
+.product-list-status,
+.product-list-error {
+  padding: 20px;
+  text-align: center;
+}
+ 
+.product-list-error {
+  color: #b00020;
+}
+ 
+@media (max-width: 900px) {
+  .product-list-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+ 
+@media (max-width: 600px) {
+  .product-list-items {
+    grid-template-columns: 1fr;
+  }
+ 
+  .product-list-pagination {
+    flex-wrap: wrap;
+  }
+}

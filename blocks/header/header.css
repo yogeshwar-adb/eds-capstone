@@ -1,3 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Marcellus&display=swap');
+
+:root {
+  --gold: #d4af37;
+  --gold-light: #f4d97a;
+  --white: #ffffff;
+}
+
+/* menu link hover/active effects, shared by every page */
+.nav-sections a {
+  position: relative;
+  transition: .3s ease;
+}
+
+.nav-sections a::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  transition: .35s ease;
+}
+
+.nav-sections a:hover {
+  color: var(--gold);
+}
+
+.nav-sections a:hover::before {
+  width: 100%;
+}
+
+.nav-brand a:hover {
+  color: var(--gold);
+}
+
+.active-link {
+  color: var(--gold) !important;
+}
+
+.active-link::before {
+  width: 100% !important;
+}
+
+@media (width >= 900px) {
+  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+    background: rgba(255, 255, 255, .96);
+    backdrop-filter: blur(18px);
+    border-radius: 24px;
+    padding: 20px;
+    min-width: 270px;
+    border: 1px solid rgba(212, 175, 55, .12);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .10);
+    animation: dropdownFade .25s ease;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul li {
+    border-radius: 12px;
+    padding: 14px;
+    transition: .25s ease;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul li:hover {
+    background: #faf6ef;
+    padding-left: 20px;
+  }
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* scrolled state */
+.nav-wrapper.scrolled {
+  position: fixed;
+  background: rgba(255, 255, 255, .90);
+  backdrop-filter: blur(25px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .07);
+  border-bottom: 1px solid rgba(0, 0, 0, .05);
+}
+
+.nav-wrapper.scrolled .nav-brand a,
+.nav-wrapper.scrolled .nav-sections a {
+  color: #181818;
+}
+
+.nav-wrapper.scrolled .nav-sections a:hover,
+.nav-wrapper.scrolled .nav-brand a:hover {
+  color: var(--gold);
+}
+
+.nav-tools .button-container a {
+  background: linear-gradient(135deg, #d4af37, #f4d97a);
+  color: #181818;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, .25);
+  transition: .3s ease;
+}
+
+.nav-tools .button-container a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(212, 175, 55, .35);
+}
+
+.nav-wrapper.scrolled .nav-hamburger-icon,
+.nav-wrapper.scrolled .nav-hamburger-icon::before,
+.nav-wrapper.scrolled .nav-hamburger-icon::after {
+  background: #181818;
+}
+
+/* header over hero banners and product list pages: logo and menu styling */
+body:has(.product-list) header .nav-wrapper:not(.scrolled) {
+  background: linear-gradient(180deg, rgba(10, 8, 5, 0.94), rgba(10, 8, 5, 0.8));
+}
+
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-brand a,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > button,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > button p,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > a {
+  color: var(--white);
+}
+
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > button,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > button p,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > a,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > button:hover,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > button:hover p,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > a:hover,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > p > a,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > p > a:hover {
+  color: var(--gold-light);
+}
+
+body:has(.hero, .product-list) header nav .nav-brand a {
+  font-family: 'Cinzel Decorative', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 18px rgba(255, 214, 140, 0.45);
+}
+
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > p {
+  margin: 0;
+}
+
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > p > a {
+  display: inline-block;
+  vertical-align: top;
+}
+
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > button {
+  vertical-align: top;
+  position: relative;
+}
+
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > button::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  transition: .35s ease;
+}
+
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > button:hover::before {
+  width: 100%;
+}
+
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > button,
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > a,
+body:has(.hero, .product-list) header nav .nav-sections .default-content-wrapper > ul > li > p > a {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-hamburger-icon,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-hamburger-icon::before,
+body:has(.hero, .product-list) header .nav-wrapper:not(.scrolled) nav:not([aria-expanded='true']) .nav-hamburger-icon::after {
+  background: var(--white);
+}
+
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);

@@ -1,0 +1,15 @@
+.smartbank-button .primary-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background-color: #0057b8;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.smartbank-button .primary-btn:hover {
+  background-color: #003d82;
+  color: #fff;
+}

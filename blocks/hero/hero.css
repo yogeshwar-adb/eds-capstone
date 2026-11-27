@@ -1,37 +1,360 @@
-.hero-container .hero-wrapper {
-  max-width: unset;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&display=swap');
+
+/* =====================================
+   LUXURY LIGHTING HEADER
+===================================== */
+
+:root {
+  --gold: #d4af37;
+  --gold-light: #f4d97a;
+  --charcoal: #181818;
+  --ivory: #faf7f2;
+  --white: #ffffff;
+  --glass: rgba(255,255,255,.08);
+  --shadow: rgba(0,0,0,.15);
+}
+
+/* =====================================
+   NAVBAR
+===================================== */
+
+header .nav-wrapper {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  z-index: 1000;
+
+  background: transparent;
+  border: none;
+
+  transition: all .4s ease;
+}
+
+header nav {
+  max-width: 1440px;
+  height: 100px;
+  margin: auto;
+  padding: 0 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =====================================
+   LOGO
+===================================== */
+
+.nav-brand a {
+  color: white;
+  text-decoration: none;
+
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 8px;
+
+  text-transform: uppercase;
+
+  transition: .3s ease;
+}
+
+.nav-brand a:hover {
+  color: var(--gold);
+}
+
+.nav-brand img {
+  max-height: 70px;
+  width: auto;
+}
+
+/* =====================================
+   MENU LINKS
+===================================== */
+
+.nav-sections ul {
+  gap: 42px;
+}
+
+/* link hover, dropdown, scrolled and CTA styles live in header.css */
+.nav-sections a {
+  color: white;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+/* =====================================
+   HAMBURGER
+===================================== */
+
+.nav-hamburger button {
+  background: transparent;
+}
+
+.nav-hamburger-icon,
+.nav-hamburger-icon::before,
+.nav-hamburger-icon::after {
+  background: white;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 899px) {
+
+  header nav {
+    padding: 0 20px;
+  }
+
+  .nav-brand a {
+    font-size: 24px;
+    letter-spacing: 4px;
+  }
+
+  header nav[aria-expanded='true'] {
+
+    background: rgba(255,255,255,.98);
+
+    backdrop-filter: blur(20px);
+  }
+
+  header nav[aria-expanded='true'] .nav-sections a {
+    color: var(--charcoal);
+  }
+}
+
+/* =====================================
+   HERO BANNER
+===================================== */
+
+/* header floats over the hero so the banner image runs up behind logo and menu */
+body:has(.hero) header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1000;
+}
+
+body:has(.hero) header .nav-wrapper:not(.scrolled) {
+  background-color: transparent;
+}
+
+/* full-bleed section, so the banner runs edge to edge under the transparent nav */
+main > .section:has(.hero) {
+  margin: 0;
+}
+
+main > .section:has(.hero) > div {
+  max-width: none;
+  margin: 0;
   padding: 0;
 }
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: clamp(420px, 100vh, 900px);
+  padding: clamp(72px, 12vh, 160px) max(60px, calc((100% - 1440px) / 2 + 60px)) clamp(64px, 14vh, 150px);
+
+  color: var(--ivory);
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
-}
-
-.hero picture {
+/* background image */
+.hero > div:first-child {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  z-index: -2;
+  margin: 0;
 }
 
-.hero img {
-  object-fit: cover;
+.hero > div:first-child picture,
+.hero > div:first-child img {
+  display: block;
   width: 100%;
   height: 100%;
 }
 
-@media (width >= 900px) {
+.hero > div:first-child > div {
+  height: 100%;
+}
+
+.hero > div:first-child img {
+  object-fit: cover;
+  animation: hero-zoom 14s ease-out both;
+}
+
+/* readability overlay: dark on the left where the copy sits, warm fade at the bottom */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(24,24,24,.88) 0%, rgba(24,24,24,.55) 45%, rgba(24,24,24,.1) 100%),
+    linear-gradient(0deg, rgba(24,24,24,.65) 0%, rgba(24,24,24,0) 50%);
+}
+
+/* copy */
+.hero > div:not(:first-child) {
+  position: relative;
+  animation: hero-fade-up .9s cubic-bezier(.2,.7,.2,1) both;
+}
+
+.hero > div:nth-child(3) { animation-delay: .15s; }
+.hero > div:nth-child(4) { animation-delay: .3s; }
+
+.hero > div:not(:first-child) > div {
+  max-width: 680px;
+}
+
+.hero p {
+  margin: 0;
+}
+
+/* gold rule above the headline */
+.hero > div:nth-child(2) > div::before {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 2px;
+  margin-bottom: clamp(18px, 3vh, 28px);
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(44px, min(7.2vw, 12vh), 116px);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.005em;
+  color: var(--white);
+  text-wrap: balance;
+  text-shadow: 0 0 28px rgba(255, 214, 140, .25), 0 2px 24px rgba(0, 0, 0, .35);
+}
+
+.hero > div:nth-child(3) > div {
+  margin-top: 24px;
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: clamp(17px, 1.5vw, 21px);
+  letter-spacing: .03em;
+  line-height: 1.75;
+  color: rgba(250,247,242,.9);
+  max-width: 540px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .4);
+}
+
+/* call to action: pill styled like the navbar CTA */
+.hero > div:last-child {
+  margin-top: clamp(16px, 3.5vh, 40px);
+}
+
+.hero > div:last-child > div {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 40px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--charcoal);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 25px rgba(212,175,55,.25);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.hero > div:last-child > div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(212,175,55,.4);
+}
+
+.hero > div:last-child a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero > div:last-child a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 900px) {
+  .hero > div:nth-child(2) > div {
+    max-width: none;
+  }
+
+  .hero h1 {
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 640px) {
+  .hero h1 {
+    font-size: clamp(44px, 9vh, 72px);
+  }
+
+  .hero > div:nth-child(3) > div {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero > div:first-child img,
+  .hero > div:not(:first-child) {
+    animation: none;
+  }
+}
+
+@media (max-width: 899px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 620px;
+    padding: 140px 24px 64px;
+  }
+
+  .hero::before {
+    background:
+      linear-gradient(0deg, rgba(24,24,24,.92) 0%, rgba(24,24,24,.6) 55%, rgba(24,24,24,.25) 100%);
+  }
+
+  .hero > div:last-child > div {
+    padding: 14px 32px;
   }
 }
